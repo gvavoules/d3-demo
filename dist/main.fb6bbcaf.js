@@ -28991,7 +28991,7 @@ var render = function render(data) {
   }).attr('height', yScale.bandwidth());
 };
 
-(0, _d.csv)('csv/data.csv').then(function (data) {
+(0, _d.csv)('src/csv/data.csv').then(function (data) {
   data.forEach(function (d) {
     d.population = +d.population * 1000;
   });
