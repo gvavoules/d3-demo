@@ -1,4 +1,3 @@
-import './../css/main.css'
 import {
   select,
   csv,
@@ -15,9 +14,9 @@ const width = +svg.attr('width')
 const height = +svg.attr('height')
 
 const render = data => {
-  const xValue = d => d.population;
+  const xValue = d => +d.population;
   const yValue = d => d.country;
-  const margin = {top: 20, right: 20, bottom: 20, left: 100};
+  const margin = {top: 20, right: 40, bottom: 20, left: 100};
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.botton;
 
@@ -44,7 +43,7 @@ const render = data => {
       .attr('height', yScale.bandwidth());
 };
 
-csv('src/data.csv').then(data => {
+csv('data.csv').then(data => {
   data.forEach(d => {
     d.population = +d.population * 1000;
   });
