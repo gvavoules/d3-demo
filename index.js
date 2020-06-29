@@ -20,11 +20,11 @@ const render = data => {
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.botton;
 
-  const xScale = scaleLinear();
+  const xScale = scaleLinear()
     .domain([0, max(data,xValue)])
     .range([0, innerWidth]);
 
-  const yScale = scaleBand();
+  const yScale = scaleBand()
     .domain(data.map(yValue))
     .range([0, innerHeight])
     .padding(0.1);
@@ -40,7 +40,7 @@ const render = data => {
     .enter().append('rect')
       .attr('y', d => yScale(yValue(d)))
       .attr('width',d => xScale(xValue(d)))
-      .attr('height, yScale.bandwidth());
+      .attr('height', yScale.bandwidth());
 };
 
 csv('data.csv').then(data => {
