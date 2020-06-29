@@ -43,7 +43,7 @@ const render = data => {
       .attr('height', yScale.bandwidth());
 };
 
-csv('src/csv/data.csv').then(data => {
+csv('./csv/data.csv').then(data => {
   data.forEach(d => {
     d.population = +d.population * 1000;
   });

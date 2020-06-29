@@ -1,4 +1,4 @@
-import '../css/main.css';
+import './css/main.css';
 import {
   select,
   csv,
@@ -14,6 +14,6 @@ const svg = select('svg');
 const width = +svg.attr('width')
 const height = +svg.attr('height')
 
-csv('../csv/data.csv').then(data => {
+csv('./data.csv').then(data => {
   console.log(data);
 });
