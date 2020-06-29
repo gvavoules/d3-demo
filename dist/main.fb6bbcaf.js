@@ -28991,7 +28991,7 @@ var render = function render(data) {
   }).attr('height', yScale.bandwidth());
 };
 
-(0, _d.csv)('data.csv').then(function (data) {
+(0, _d.csv)('csv/data.csv').then(function (data) {
   data.forEach(function (d) {
     d.population = +d.population * 1000;
   });
@@ -29025,7 +29025,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63968" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52354" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
