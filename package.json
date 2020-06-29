@@ -1,0 +1,27 @@
+{
+  "name": "d3-demo",
+  "version": "1.0.0",
+  "description": "Test demo of d3",
+  "main": "js/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gvavoules/d3-demo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gvavoules/d3-demo/issues"
+  },
+  "homepage": "https://github.com/gvavoules/d3-demo#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {
+    "d3": "^5.16.0"
+  }
+}
