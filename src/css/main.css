@@ -1,5 +1,5 @@
 body {
-  background-color: gray;
+  background-color: slategray;
   margin: 0px;
   overflow: hidden;
 }
@@ -9,5 +9,5 @@ rect {
 }
 
 text {
-  font-size: 1.4em;
+  font-size: 1.5em;
 }

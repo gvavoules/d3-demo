@@ -1,3 +1,4 @@
+import '../css/main.css';
 import {
   select,
   csv,
@@ -10,16 +11,16 @@ import {
 
 const svg = select('svg');
 
-const width = +svg.attr('width')
-const height = +svg.attr('height')
+const width = +svg.attr('width');
+const height = +svg.attr('height');
 
 const render = data => {
   const xValue = d => +d.population;
   const yValue = d => d.country;
   const margin = {top: 20, right: 40, bottom: 20, left: 100};
-  const innerWidth = width - margin.left - margin.right;
-  const innerHeight = height - margin.top - margin.botton;
-
+  const innerWidth = width - +margin.left - +margin.right;
+  const innerHeight = height - +margin.top - +margin.bottom;
+  
   const xScale = scaleLinear()
     .domain([0, max(data,xValue)])
     .range([0, innerWidth]);
@@ -43,9 +44,10 @@ const render = data => {
       .attr('height', yScale.bandwidth());
 };
 
-csv('./csv/data.csv').then(data => {
+csv(require('../csv/data.csv')).then(data => {
   data.forEach(d => {
     d.population = +d.population * 1000;
   });
   render(data);
+  console.log(data);
 });
