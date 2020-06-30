@@ -1,5 +1,5 @@
 body {
-  background-color: slategray;
+  background-color: whitesmoke;
   margin: 0px;
   overflow: hidden;
 }
@@ -9,5 +9,24 @@ rect {
 }
 
 text {
+  font-family: sans-serif;
+}
+
+.tick text{
+  fill: #635F5D;
   font-size: 1.5em;
+}
+
+.tick line{
+  stroke: #C0C0BB;
+}
+
+.axis-label{
+  fill: #8E8883;
+  font-size: 4em;
+}
+
+.title{
+  fill: #635F5D;
+  font-size: 3em;
 }

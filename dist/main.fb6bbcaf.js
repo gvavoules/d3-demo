@@ -29048,23 +29048,32 @@ var render = function render(data) {
   };
 
   var margin = {
-    top: 20,
+    top: 60,
     right: 40,
-    bottom: 20,
-    left: 100
+    bottom: 75,
+    left: 160
   };
   var innerWidth = width - +margin.left - +margin.right;
   var innerHeight = height - +margin.top - +margin.bottom;
   var xScale = (0, _d.scaleLinear)().domain([0, (0, _d.max)(data, xValue)]).range([0, innerWidth]);
   var yScale = (0, _d.scaleBand)().domain(data.map(yValue)).range([0, innerHeight]).padding(0.1);
   var g = svg.append('g').attr('transform', "translate(".concat(margin.left, ",").concat(margin.top, ")"));
-  g.append('g').call((0, _d.axisLeft)(yScale));
-  g.append('g').call((0, _d.axisBottom)(xScale)).attr('transform', "translate(0,".concat(innerHeight, ")"));
+
+  var xAxisTickFormat = function xAxisTickFormat(number) {
+    return (0, _d.format)('.3s')(number).replace('G', 'B');
+  };
+
+  var xAxis = (0, _d.axisBottom)(xScale).tickFormat(xAxisTickFormat).tickSize(-innerHeight);
+  g.append('g').call((0, _d.axisLeft)(yScale)).selectAll('.domain,.tick line').remove();
+  var xAxisG = g.append('g').call(xAxis).attr('transform', "translate(0,".concat(innerHeight, ")"));
+  xAxisG.select('.domain').remove();
+  xAxisG.append('text').attr('class', 'axis-label').attr('x', innerWidth / 2).attr('y', 60).attr('fill', 'black').text('Population');
   g.selectAll('rect').data(data).enter().append('rect').attr('y', function (d) {
     return yScale(yValue(d));
   }).attr('width', function (d) {
     return xScale(xValue(d));
   }).attr('height', yScale.bandwidth());
+  g.append('text').attr('class', 'title').attr('y', -10).text('Top 10 Most Populous Countries');
 };
 
 (0, _d.csv)(require('../csv/data.csv')).then(function (data) {
@@ -29102,7 +29111,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58245" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64446" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
