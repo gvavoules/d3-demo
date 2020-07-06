@@ -29025,9 +29025,7 @@ Object.keys(_d3Zoom).forEach(function (key) {
     }
   });
 });
-},{"./dist/package.js":"../node_modules/d3/dist/package.js","d3-array":"../node_modules/d3-array/src/index.js","d3-axis":"../node_modules/d3-axis/src/index.js","d3-brush":"../node_modules/d3-brush/src/index.js","d3-chord":"../node_modules/d3-chord/src/index.js","d3-collection":"../node_modules/d3-collection/src/index.js","d3-color":"../node_modules/d3-color/src/index.js","d3-contour":"../node_modules/d3-contour/src/index.js","d3-dispatch":"../node_modules/d3-dispatch/src/index.js","d3-drag":"../node_modules/d3-drag/src/index.js","d3-dsv":"../node_modules/d3-dsv/src/index.js","d3-ease":"../node_modules/d3-ease/src/index.js","d3-fetch":"../node_modules/d3-fetch/src/index.js","d3-force":"../node_modules/d3-force/src/index.js","d3-format":"../node_modules/d3-format/src/index.js","d3-geo":"../node_modules/d3-geo/src/index.js","d3-hierarchy":"../node_modules/d3-hierarchy/src/index.js","d3-interpolate":"../node_modules/d3-interpolate/src/index.js","d3-path":"../node_modules/d3-path/src/index.js","d3-polygon":"../node_modules/d3-polygon/src/index.js","d3-quadtree":"../node_modules/d3-quadtree/src/index.js","d3-random":"../node_modules/d3-random/src/index.js","d3-scale":"../node_modules/d3-scale/src/index.js","d3-scale-chromatic":"../node_modules/d3-scale-chromatic/src/index.js","d3-selection":"../node_modules/d3-selection/src/index.js","d3-shape":"../node_modules/d3-shape/src/index.js","d3-time":"../node_modules/d3-time/src/index.js","d3-time-format":"../node_modules/d3-time-format/src/index.js","d3-timer":"../node_modules/d3-timer/src/index.js","d3-transition":"../node_modules/d3-transition/src/index.js","d3-voronoi":"../node_modules/d3-voronoi/src/index.js","d3-zoom":"../node_modules/d3-zoom/src/index.js"}],"csv/data.csv":[function(require,module,exports) {
-module.exports = "/data.4d0c656f.csv";
-},{}],"js/main.js":[function(require,module,exports) {
+},{"./dist/package.js":"../node_modules/d3/dist/package.js","d3-array":"../node_modules/d3-array/src/index.js","d3-axis":"../node_modules/d3-axis/src/index.js","d3-brush":"../node_modules/d3-brush/src/index.js","d3-chord":"../node_modules/d3-chord/src/index.js","d3-collection":"../node_modules/d3-collection/src/index.js","d3-color":"../node_modules/d3-color/src/index.js","d3-contour":"../node_modules/d3-contour/src/index.js","d3-dispatch":"../node_modules/d3-dispatch/src/index.js","d3-drag":"../node_modules/d3-drag/src/index.js","d3-dsv":"../node_modules/d3-dsv/src/index.js","d3-ease":"../node_modules/d3-ease/src/index.js","d3-fetch":"../node_modules/d3-fetch/src/index.js","d3-force":"../node_modules/d3-force/src/index.js","d3-format":"../node_modules/d3-format/src/index.js","d3-geo":"../node_modules/d3-geo/src/index.js","d3-hierarchy":"../node_modules/d3-hierarchy/src/index.js","d3-interpolate":"../node_modules/d3-interpolate/src/index.js","d3-path":"../node_modules/d3-path/src/index.js","d3-polygon":"../node_modules/d3-polygon/src/index.js","d3-quadtree":"../node_modules/d3-quadtree/src/index.js","d3-random":"../node_modules/d3-random/src/index.js","d3-scale":"../node_modules/d3-scale/src/index.js","d3-scale-chromatic":"../node_modules/d3-scale-chromatic/src/index.js","d3-selection":"../node_modules/d3-selection/src/index.js","d3-shape":"../node_modules/d3-shape/src/index.js","d3-time":"../node_modules/d3-time/src/index.js","d3-time-format":"../node_modules/d3-time-format/src/index.js","d3-timer":"../node_modules/d3-timer/src/index.js","d3-transition":"../node_modules/d3-transition/src/index.js","d3-voronoi":"../node_modules/d3-voronoi/src/index.js","d3-zoom":"../node_modules/d3-zoom/src/index.js"}],"js/main.js":[function(require,module,exports) {
 "use strict";
 
 require("../css/main.css");
@@ -29039,51 +29037,61 @@ var width = +svg.attr('width');
 var height = +svg.attr('height');
 
 var render = function render(data) {
+  var title = 'Cars: Horsepower v. Weight';
+
   var xValue = function xValue(d) {
-    return +d.population;
+    return +d.horsepower;
   };
+
+  var xAxisLabel = 'Horsepower';
 
   var yValue = function yValue(d) {
-    return d.country;
+    return +d.weight;
   };
 
+  var yAxisLabel = 'Weight';
+  var circleRadius = 10;
   var margin = {
     top: 60,
     right: 40,
     bottom: 75,
-    left: 160
+    left: 150
   };
   var innerWidth = width - +margin.left - +margin.right;
   var innerHeight = height - +margin.top - +margin.bottom;
-  var xScale = (0, _d.scaleLinear)().domain([0, (0, _d.max)(data, xValue)]).range([0, innerWidth]);
-  var yScale = (0, _d.scaleBand)().domain(data.map(yValue)).range([0, innerHeight]).padding(0.1);
+  var xScale = (0, _d.scaleLinear)().domain((0, _d.extent)(data, xValue)).range([0, innerWidth]).nice();
+  var yScale = (0, _d.scaleLinear)().domain((0, _d.extent)(data, yValue)).range([0, innerHeight]).nice();
   var g = svg.append('g').attr('transform', "translate(".concat(margin.left, ",").concat(margin.top, ")"));
-
-  var xAxisTickFormat = function xAxisTickFormat(number) {
-    return (0, _d.format)('.3s')(number).replace('G', 'B');
-  };
-
-  var xAxis = (0, _d.axisBottom)(xScale).tickFormat(xAxisTickFormat).tickSize(-innerHeight);
-  g.append('g').call((0, _d.axisLeft)(yScale)).selectAll('.domain,.tick line').remove();
+  var xAxis = (0, _d.axisBottom)(xScale).tickSize(-innerHeight).tickPadding(15);
+  var yAxis = (0, _d.axisLeft)(yScale).tickSize(-innerWidth).tickPadding(10);
+  var yAxisG = g.append('g').call(yAxis);
+  yAxisG.selectAll('.domain').remove();
+  yAxisG.append('text').attr('class', 'axis-label').attr('x', -innerHeight / 2).attr('y', -70).attr('fill', 'black').attr('transform', "rotate(-90)").attr('text-anchor', 'middle').text(yAxisLabel);
   var xAxisG = g.append('g').call(xAxis).attr('transform', "translate(0,".concat(innerHeight, ")"));
   xAxisG.select('.domain').remove();
-  xAxisG.append('text').attr('class', 'axis-label').attr('x', innerWidth / 2).attr('y', 60).attr('fill', 'black').text('Population');
-  g.selectAll('rect').data(data).enter().append('rect').attr('y', function (d) {
-    return yScale(yValue(d));
-  }).attr('width', function (d) {
+  xAxisG.append('text').attr('class', 'axis-label').attr('x', innerWidth / 2).attr('y', 60).attr('fill', 'black').text(xAxisLabel);
+  g.selectAll('circle').data(data).enter().append('circle').attr('cx', function (d) {
     return xScale(xValue(d));
-  }).attr('height', yScale.bandwidth());
-  g.append('text').attr('class', 'title').attr('y', -10).text('Top 10 Most Populous Countries');
+  }).attr('cy', function (d) {
+    return yScale(yValue(d));
+  }).attr('r', circleRadius);
+  g.append('text').attr('class', 'title').attr('y', -10).text(title);
 };
 
-(0, _d.csv)(require('../csv/data.csv')).then(function (data) {
+(0, _d.csv)('https://vizhub.com/curran/datasets/auto-mpg.csv').then(function (data) {
   data.forEach(function (d) {
-    d.population = +d.population * 1000;
+    d.mpg = +d.mpg;
+    d.cylinders = +d.cylinders;
+    d.displacement = +d.displacement;
+    d.horsepower = +d.horsepower;
+    d.weight = +d.weight;
+    d.acceleration = +d.acceleration;
+    d.year = +d.year;
   });
   render(data);
   console.log(data);
 });
-},{"../css/main.css":"css/main.css","d3":"../node_modules/d3/index.js","../csv/data.csv":"csv/data.csv"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"../css/main.css":"css/main.css","d3":"../node_modules/d3/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -29111,7 +29119,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64446" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52850" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
