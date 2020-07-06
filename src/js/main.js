@@ -1,6 +1,7 @@
 import '../css/main.css';
 import {
   select,
+<<<<<<< HEAD
   csv,
   scaleLinear,
 <<<<<<< HEAD
@@ -13,12 +14,15 @@ import {
   area,
   format,
   curveBasis
+=======
+  range
+>>>>>>> new updates
 } from 'd3';
+import {fruitBowl} from './fruitBowl.js'
 
 const svg = select('svg');
-
-const width = +svg.attr('width');
 const height = +svg.attr('height');
+<<<<<<< HEAD
 
 const render = data => {
 <<<<<<< HEAD
@@ -166,3 +170,47 @@ csv('https://vizhub.com/curran/datasets/temperature-in-san-francisco.csv')
     render(data);
     console.log(data);
   });
+=======
+const makeFruit = type => ({
+  type,
+  id: Math.random()
+});
+ 
+let fruits = range(5)
+  .map(() => makeFruit('apple'));
+let selectedFruit = null;
+
+const setSelectedFruit = id => {
+  selectedFruit = id;
+  render();
+}
+
+const render = () => {
+  fruitBowl(svg,{
+    fruits,
+    height,
+    setSelectedFruit,
+    selectedFruit
+  })
+}
+
+render();
+
+//eat an apple
+setTimeout(() => {
+  fruits.pop();
+  render();
+},1000);
+
+//Replace an apple with a lemon
+setTimeout(() => {
+  fruits[2].type = 'lemon'
+  render();
+},2000);
+
+//eat the 2nd apple
+setTimeout(() => {
+  fruits = fruits.filter((d,i) => i !== 1);
+  render();
+},3000);
+>>>>>>> new updates

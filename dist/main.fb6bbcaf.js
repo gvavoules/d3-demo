@@ -29025,17 +29025,63 @@ Object.keys(_d3Zoom).forEach(function (key) {
     }
   });
 });
+<<<<<<< HEAD
 },{"./dist/package.js":"../node_modules/d3/dist/package.js","d3-array":"../node_modules/d3-array/src/index.js","d3-axis":"../node_modules/d3-axis/src/index.js","d3-brush":"../node_modules/d3-brush/src/index.js","d3-chord":"../node_modules/d3-chord/src/index.js","d3-collection":"../node_modules/d3-collection/src/index.js","d3-color":"../node_modules/d3-color/src/index.js","d3-contour":"../node_modules/d3-contour/src/index.js","d3-dispatch":"../node_modules/d3-dispatch/src/index.js","d3-drag":"../node_modules/d3-drag/src/index.js","d3-dsv":"../node_modules/d3-dsv/src/index.js","d3-ease":"../node_modules/d3-ease/src/index.js","d3-fetch":"../node_modules/d3-fetch/src/index.js","d3-force":"../node_modules/d3-force/src/index.js","d3-format":"../node_modules/d3-format/src/index.js","d3-geo":"../node_modules/d3-geo/src/index.js","d3-hierarchy":"../node_modules/d3-hierarchy/src/index.js","d3-interpolate":"../node_modules/d3-interpolate/src/index.js","d3-path":"../node_modules/d3-path/src/index.js","d3-polygon":"../node_modules/d3-polygon/src/index.js","d3-quadtree":"../node_modules/d3-quadtree/src/index.js","d3-random":"../node_modules/d3-random/src/index.js","d3-scale":"../node_modules/d3-scale/src/index.js","d3-scale-chromatic":"../node_modules/d3-scale-chromatic/src/index.js","d3-selection":"../node_modules/d3-selection/src/index.js","d3-shape":"../node_modules/d3-shape/src/index.js","d3-time":"../node_modules/d3-time/src/index.js","d3-time-format":"../node_modules/d3-time-format/src/index.js","d3-timer":"../node_modules/d3-timer/src/index.js","d3-transition":"../node_modules/d3-transition/src/index.js","d3-voronoi":"../node_modules/d3-voronoi/src/index.js","d3-zoom":"../node_modules/d3-zoom/src/index.js"}],"js/main.js":[function(require,module,exports) {
+=======
+},{"./dist/package.js":"../node_modules/d3/dist/package.js","d3-array":"../node_modules/d3-array/src/index.js","d3-axis":"../node_modules/d3-axis/src/index.js","d3-brush":"../node_modules/d3-brush/src/index.js","d3-chord":"../node_modules/d3-chord/src/index.js","d3-collection":"../node_modules/d3-collection/src/index.js","d3-color":"../node_modules/d3-color/src/index.js","d3-contour":"../node_modules/d3-contour/src/index.js","d3-dispatch":"../node_modules/d3-dispatch/src/index.js","d3-drag":"../node_modules/d3-drag/src/index.js","d3-dsv":"../node_modules/d3-dsv/src/index.js","d3-ease":"../node_modules/d3-ease/src/index.js","d3-fetch":"../node_modules/d3-fetch/src/index.js","d3-force":"../node_modules/d3-force/src/index.js","d3-format":"../node_modules/d3-format/src/index.js","d3-geo":"../node_modules/d3-geo/src/index.js","d3-hierarchy":"../node_modules/d3-hierarchy/src/index.js","d3-interpolate":"../node_modules/d3-interpolate/src/index.js","d3-path":"../node_modules/d3-path/src/index.js","d3-polygon":"../node_modules/d3-polygon/src/index.js","d3-quadtree":"../node_modules/d3-quadtree/src/index.js","d3-random":"../node_modules/d3-random/src/index.js","d3-scale":"../node_modules/d3-scale/src/index.js","d3-scale-chromatic":"../node_modules/d3-scale-chromatic/src/index.js","d3-selection":"../node_modules/d3-selection/src/index.js","d3-shape":"../node_modules/d3-shape/src/index.js","d3-time":"../node_modules/d3-time/src/index.js","d3-time-format":"../node_modules/d3-time-format/src/index.js","d3-timer":"../node_modules/d3-timer/src/index.js","d3-transition":"../node_modules/d3-transition/src/index.js","d3-voronoi":"../node_modules/d3-voronoi/src/index.js","d3-zoom":"../node_modules/d3-zoom/src/index.js"}],"js/fruitBowl.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.fruitBowl = void 0;
+
+var _d = require("d3");
+
+var colorScale = (0, _d.scaleOrdinal)().domain(['apple', 'lemon']).range(['#c11d1d', '#eae600']);
+var radiusScale = (0, _d.scaleOrdinal)().domain(['apple', 'lemon']).range(['50', '30']);
+
+var xPosition = function xPosition(d, i) {
+  return i * 120 + 60;
+};
+
+var fruitBowl = function fruitBowl(selection, props) {
+  var fruits = props.fruits,
+      height = props.height,
+      setSelectedFruit = props.setSelectedFruit,
+      selectedFruit = props.selectedFruit;
+  var circles = selection.selectAll('circle').data(fruits, function (d) {
+    return d.id;
+  });
+  circles.enter().append('circle').attr('cx', xPosition).attr('cy', height / 2).attr('r', 0).merge(circles).attr('fill', function (d) {
+    return colorScale(d.type);
+  }).attr('stroke-width', 5).attr('stroke', function (d) {
+    return d.id === selectedFruit ? 'black' : 'none';
+  }).on('mouseover', function (d) {
+    return setSelectedFruit(d.id);
+  }).on('mouseout', function () {
+    return setSelectedFruit(null);
+  }).transition().duration(1000).attr('cx', xPosition).attr('r', function (d) {
+    return radiusScale(d.type);
+  });
+  circles.exit().transition().duration(1000).attr('r', 0).remove();
+};
+
+exports.fruitBowl = fruitBowl;
+},{"d3":"../node_modules/d3/index.js"}],"js/main.js":[function(require,module,exports) {
+>>>>>>> new updates
 "use strict";
 
 require("../css/main.css");
 
 var _d = require("d3");
 
+var _fruitBowl = require("./fruitBowl.js");
+
 var svg = (0, _d.select)('svg');
-var width = +svg.attr('width');
 var height = +svg.attr('height');
 
+<<<<<<< HEAD
 var render = function render(data) {
 <<<<<<< HEAD
   var title = 'Cars: Horsepower v. Weight';
@@ -29057,8 +29103,16 @@ var render = function render(data) {
 
   var xValue = function xValue(d) {
     return d.timestamp;
+=======
+var makeFruit = function makeFruit(type) {
+  return {
+    type: type,
+    id: Math.random()
+>>>>>>> new updates
   };
+};
 
+<<<<<<< HEAD
   var xAxisLabel = 'Time';
 
   var yValue = function yValue(d) {
@@ -29136,6 +29190,46 @@ var render = function render(data) {
   console.log(data);
 });
 },{"../css/main.css":"css/main.css","d3":"../node_modules/d3/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+=======
+var fruits = (0, _d.range)(5).map(function () {
+  return makeFruit('apple');
+});
+var selectedFruit = null;
+
+var setSelectedFruit = function setSelectedFruit(id) {
+  selectedFruit = id;
+  render();
+};
+
+var render = function render() {
+  (0, _fruitBowl.fruitBowl)(svg, {
+    fruits: fruits,
+    height: height,
+    setSelectedFruit: setSelectedFruit,
+    selectedFruit: selectedFruit
+  });
+};
+
+render(); //eat an apple
+
+setTimeout(function () {
+  fruits.pop();
+  render();
+}, 1000); //Replace an apple with a lemon
+
+setTimeout(function () {
+  fruits[2].type = 'lemon';
+  render();
+}, 2000); //eat the 2nd apple
+
+setTimeout(function () {
+  fruits = fruits.filter(function (d, i) {
+    return i !== 1;
+  });
+  render();
+}, 3000);
+},{"../css/main.css":"css/main.css","d3":"../node_modules/d3/index.js","./fruitBowl.js":"js/fruitBowl.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+>>>>>>> new updates
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -29164,9 +29258,13 @@ if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
 <<<<<<< HEAD
+<<<<<<< HEAD
   var ws = new WebSocket(protocol + '://' + hostname + ':' + "52850" + '/');
 =======
   var ws = new WebSocket(protocol + '://' + hostname + ':' + "49283" + '/');
+>>>>>>> new updates
+=======
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59285" + '/');
 >>>>>>> new updates
 
   ws.onmessage = function (event) {

@@ -11,9 +11,13 @@
   "repository": {
     "type": "git",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "url": "git+https://github.com/gvavoules/d3-scatterplot.git"
 =======
     "url": "git+https://github.com/gvavoules/d3-line-and-area.git"
+>>>>>>> new updates
+=======
+    "url": "git+https://github.com/gvavoules/d3-general-update-pattern.git"
 >>>>>>> new updates
   },
   "author": "",
