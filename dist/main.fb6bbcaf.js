@@ -29037,6 +29037,7 @@ var width = +svg.attr('width');
 var height = +svg.attr('height');
 
 var render = function render(data) {
+<<<<<<< HEAD
   var title = 'Cars: Horsepower v. Weight';
 
   var xValue = function xValue(d) {
@@ -29051,6 +29052,22 @@ var render = function render(data) {
 
   var yAxisLabel = 'Weight';
   var circleRadius = 10;
+=======
+  var title = 'A week in San Francisco';
+
+  var xValue = function xValue(d) {
+    return d.timestamp;
+  };
+
+  var xAxisLabel = 'Time';
+
+  var yValue = function yValue(d) {
+    return d.temperature;
+  };
+
+  var yAxisLabel = 'Temperature';
+  var circleRadius = 6;
+>>>>>>> new updates
   var margin = {
     top: 60,
     right: 40,
@@ -29059,6 +29076,7 @@ var render = function render(data) {
   };
   var innerWidth = width - +margin.left - +margin.right;
   var innerHeight = height - +margin.top - +margin.bottom;
+<<<<<<< HEAD
   var xScale = (0, _d.scaleLinear)().domain((0, _d.extent)(data, xValue)).range([0, innerWidth]).nice();
   var yScale = (0, _d.scaleLinear)().domain((0, _d.extent)(data, yValue)).range([0, innerHeight]).nice();
   var g = svg.append('g').attr('transform', "translate(".concat(margin.left, ",").concat(margin.top, ")"));
@@ -29087,6 +29105,32 @@ var render = function render(data) {
     d.weight = +d.weight;
     d.acceleration = +d.acceleration;
     d.year = +d.year;
+=======
+  var xScale = (0, _d.scaleTime)().domain((0, _d.extent)(data, xValue)).range([0, innerWidth]);
+  var yScale = (0, _d.scaleLinear)().domain((0, _d.extent)(data, yValue)).range([innerHeight, 0]).nice();
+  var g = svg.append('g').attr('transform', "translate(".concat(margin.left, ",").concat(margin.top, ")"));
+  var xAxis = (0, _d.axisBottom)(xScale).tickSize(-innerHeight).ticks(6).tickPadding(15);
+  var yAxis = (0, _d.axisLeft)(yScale).tickSize(-innerWidth).tickPadding(10);
+  var yAxisG = g.append('g').call(yAxis);
+  yAxisG.selectAll('.domain').remove();
+  yAxisG.append('text').attr('class', 'axis-label').attr('x', -innerHeight / 2).attr('y', -50).attr('fill', 'black').attr('transform', "rotate(-90)").attr('text-anchor', 'middle').text(yAxisLabel);
+  var xAxisG = g.append('g').call(xAxis).attr('transform', "translate(0,".concat(innerHeight, ")"));
+  xAxisG.select('.domain').remove();
+  xAxisG.append('text').attr('class', 'axis-label').attr('x', innerWidth / 2).attr('y', 60).attr('fill', 'black').text(xAxisLabel);
+  var areaGenerator = (0, _d.area)().x(function (d) {
+    return xScale(xValue(d));
+  }).y0(innerHeight).y1(function (d) {
+    return yScale(yValue(d));
+  }).curve(_d.curveBasis);
+  g.append('path').attr('class', 'line-path').attr('d', areaGenerator(data));
+  g.append('text').attr('class', 'title').attr('y', -10).text(title);
+};
+
+(0, _d.csv)('https://vizhub.com/curran/datasets/temperature-in-san-francisco.csv').then(function (data) {
+  data.forEach(function (d) {
+    d.timestamp = new Date(d.timestamp);
+    d.temperature = +d.temperature;
+>>>>>>> new updates
   });
   render(data);
   console.log(data);
@@ -29119,7 +29163,11 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
+<<<<<<< HEAD
   var ws = new WebSocket(protocol + '://' + hostname + ':' + "52850" + '/');
+=======
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49283" + '/');
+>>>>>>> new updates
 
   ws.onmessage = function (event) {
     checkedAssets = {};

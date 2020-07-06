@@ -5,8 +5,20 @@ body {
 }
 
 circle {
+<<<<<<< HEAD
   fill: red;
   opacity: 0.3;
+=======
+  fill: steelblue;
+  opacity: 0.8;
+}
+
+.line-path {
+  fill:maroon;
+  stroke: maroon;
+  stroke-width: 5;
+  stroke-linejoin: round;
+>>>>>>> new updates
 }
 
 text {
